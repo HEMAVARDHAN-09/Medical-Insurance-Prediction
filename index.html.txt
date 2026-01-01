@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insurance Premium Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+            background-size: cover;
+        }
+        h1 { color: #333; text-align: center; }
+        .container {
+            background: rgba(255,255,255,0.85);
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label, input, select {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e0ffe0;
+            border-left: 5px solid #28a745;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Predict Insurance Premium</h1>
+        <form action="/predict" method="POST">
+            <label for="age">Age:</label>
+            <input type="number" name="Age" min="0" required>
+
+            <label for="smoking">Smoking Status:</label>
+            <select name="Smoking Status" required>
+                <option value="Smoker">Smoker</option>
+                <option value="Non-Smoker">Non-Smoker</option>
+            </select>
+
+            <label for="health_score">Health Score (0–100):</label>
+            <input type="number" name="Health Score" min="0" max="100" required>
+
+            <label for="location">Location:</label>
+            <select name="Location" required>
+                <option value="Urban">Urban</option>
+                <option value="Rural">Rural</option>
+                <option value="Suburban">Suburban</option>
+            </select>
+
+            <label for="dependents">Number of Dependents:</label>
+            <input type="number" name="Number of Dependents" min="0" required>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <strong>Predicted Premium Amount:</strong> ₹{{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
